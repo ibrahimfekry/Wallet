@@ -1,3 +1,4 @@
+import 'package:expense_app/core/widgets/expense_form.dart';
 import 'package:flutter/material.dart';
 
 import 'category_fetcher.dart';
@@ -13,7 +14,15 @@ class CategoryPage extends StatelessWidget {
         title: const Text('Expense Wallet'),
         centerTitle: true,
       ),
-      body: CategoryFetcher(),
+      body: const CategoryFetcher(),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: (){
+        showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (_)=> ExpenseForm());
+      }),
     );
   }
 }
