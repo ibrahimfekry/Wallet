@@ -126,13 +126,16 @@ class DatabaseProvider with ChangeNotifier {
         //notify the listeners about the change in value
         notifyListeners();
 
-        var data = calculateEntriesAndAmount(expense.category);
-        updateCategory(expense.category, data['entries'], data['totalAmount']);
+        var ex = findCategory(expense.category);
+        updateCategory(expense.category, ex.entries +1, ex.totalAmount +expense.amount);
       });
     });
   }
 
-Map<String ,dynamic>calculateEntriesAndAmount(String category){
+  ExpenseCategory findCategory(String title){
+    return _categories.firstWhere((element) => element.title == title);
+  }
+  Map<String ,dynamic>calculateEntriesAndAmount(String category){
     double total = 0.0;
     var list = _expenses.where((element) => element.category == category);
     for(final i in list){

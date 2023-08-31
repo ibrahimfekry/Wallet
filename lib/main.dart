@@ -1,4 +1,5 @@
 import 'package:expense_app/models/database_provider.dart';
+import 'package:expense_app/pages/expense_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       initialRoute: CategoryPage.id,
       routes: {
         CategoryPage.id :(_)=> CategoryPage(),
+        ExpensePage.id :(_)=> ExpensePage(),
       },
     );
   }

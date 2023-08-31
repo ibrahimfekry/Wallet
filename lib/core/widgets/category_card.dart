@@ -10,6 +10,7 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: (){},
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Icon(category.icon),
