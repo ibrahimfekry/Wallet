@@ -1,6 +1,11 @@
+import 'package:expense_app/core/constants/colors.dart';
+import 'package:expense_app/core/widgets/default_text.dart';
+import 'package:expense_app/core/widgets/default_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
-
+import 'package:intl/intl.dart';
 import '../../models/database_provider.dart';
 import '../../models/expense.dart';
 import '../constants/icons.dart';
@@ -18,91 +23,107 @@ class _ExpenseFormState extends State<ExpenseForm> {
   DateTime? _date;
   String _initialValue = 'Other';
 
+  //
   _pickDate() async {
     DateTime? pickedDate = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
-        firstDate: DateTime(2023),
+        firstDate: DateTime(2022),
         lastDate: DateTime.now());
-    if(pickedDate != null){
+
+    if (pickedDate != null) {
       setState(() {
         _date = pickedDate;
       });
     }
   }
 
+  //
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<DatabaseProvider>(context ,listen: true);
+    final provider = Provider.of<DatabaseProvider>(context, listen: false);
     return Container(
       height: MediaQuery.of(context).size.height * 0.7,
-      padding: EdgeInsets.all(20),
+      padding:  EdgeInsets.all(20.0.r),
       child: SingleChildScrollView(
         child: Column(
           children: [
-            TextField(
-              controller: _title,
-              decoration: const InputDecoration(
-                labelText: 'Title of expense',
-              ),
+            DefaultTextField(
+              hintText: 'Title of expense',
+              controller:_title ,
             ),
-            const SizedBox(
-              height: 20,
+
+             SizedBox(height: 20.0.h),
+            DefaultTextField(
+              hintText: 'Amount of expense',
+              controller:_amount ,
             ),
-            TextField(
-              controller: _amount,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Amount of expense'),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+
+             SizedBox(height: 20.0.h),
+            // date picker
             Row(
               children: [
                 Expanded(
-                    child: Text(
-                        _date != null ? _date.toString() : 'Select Date ')),
+                  child: Text(_date != null
+                      ? DateFormat('MMMM dd, yyyy').format(_date!)
+                      : 'Select Date'),
+                ),
                 IconButton(
-                    onPressed: () => _pickDate(), icon: const Icon(Icons.calendar_month))
+                  onPressed: () => _pickDate(),
+                  icon: const Icon(Icons.calendar_month),
+                ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+             SizedBox(height: 20.0.h),
+            // category
             Row(
               children: [
                 const Expanded(child: Text('Category')),
-                Expanded(child: DropdownButton(
-                    items: icons.keys.map((e) => DropdownMenuItem(value: e,child: Text(e),)).toList(),
+                Expanded(
+                  child: DropdownButton(
+                    items: icons.keys
+                        .map(
+                          (e) => DropdownMenuItem(
+                        value: e,
+                        child: Text(e),
+                      ),
+                    )
+                        .toList(),
                     value: _initialValue,
-                    onChanged: (newValue){
+                    onChanged: (newValue) {
                       setState(() {
                         _initialValue = newValue!;
                       });
                     },
-                )),
+                  ),
+                ),
               ],
             ),
-            const SizedBox(height: 20,),
+            SizedBox(height: 20.0.h),
             ElevatedButton.icon(
-                onPressed: (){
-                  if(_title.text != '' &&_amount.text != ''){
-                    //create an expense
-                    final file = Expense(
-                      id: 0,
-                      title: _title.text,
-                      amount: double.parse(_amount.text),
-                      date: _date != null ? _date! :DateTime.now(),
-                      category:_initialValue,
-                    );
-                    //and add it to database
-                    provider.addExpense(file);
-                    //close the bottom sheet
-                    Navigator.pop(context);
-                  }
-                },
-                label: Text('Add expense'),
+              onPressed: () {
+                if (_title.text != '' && _amount.text != '') {
+                  // create an expense
+                  final file = Expense(
+                    id: 0,
+                    title: _title.text,
+                    amount: double.parse(_amount.text),
+                    date: _date != null ? _date! : DateTime.now(),
+                    category: _initialValue,
+                  );
+                  // add it to database.
+                  provider.addExpense(file);
+                  // close the bottom sheet
+                  Navigator.of(context).pop();
+                }
+              },
               icon: const Icon(Icons.add),
+              label: DefaultText(
+                text: 'Add Expense',
+              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(primaryColor),
+              ),
             ),
           ],
         ),

@@ -1,12 +1,11 @@
 // this is expense category class or model
 // every expense will have a category that it belongs to.
-import 'package:expense_app/core/constants/icons.dart';
 import 'package:flutter/material.dart';
+import '../core/constants/icons.dart';
 
 class ExpenseCategory {
   final String title; // the title of the category
-  int entries =
-  0; // how many expenses are in this category. it will change overtime
+  int entries = 0; // how many expenses are in this category. it will change overtime
   double totalAmount = 0.0; // total amount of expenses in this category
   final IconData icon; // we will define some constant icons.
 
@@ -21,12 +20,11 @@ class ExpenseCategory {
   // we need a method to convert this 'model' to a 'Map'.
   // so that we can insert it into a database
   Map<String, dynamic> toMap() => {
-    'title': title,
-    'entries': entries,
-    'totalAmount': totalAmount
-        .toString(), // our database won't be able to store double values so we convert it to a string
-    // not gonna store the icons in database. that's too much work.
-  };
+        'title': title,
+        'entries': entries,
+        'totalAmount': totalAmount.toString(), // our database won't be able to store double values so we convert it to a string
+        // not gonna store the icons in database. that's too much work.
+      };
 
   // when we retrieve the data from the database it will be a 'Map'.
   // for our app to understand the data, we need to convert it back to a 'Expense Category'
