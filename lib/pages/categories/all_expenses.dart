@@ -1,6 +1,6 @@
+import 'package:expense_app/core/widgets/all_expenses_screen/all_expenses_fetcher.dart';
 import 'package:flutter/material.dart';
 
-import '../core/widgets/all_expenses_screen/all_expenses_fetcher.dart';
 
 class AllExpenses extends StatefulWidget {
   const AllExpenses({super.key});

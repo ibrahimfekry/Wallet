@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import '../../../models/expense_category.dart';
-import '../../../pages/expense_page.dart';
+import '../../../pages/categories/expense_page.dart';
 import '../default_text.dart';
 
 class CategoryCard extends StatelessWidget {

@@ -2,10 +2,12 @@ import 'package:expense_app/core/widgets/default_text.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/database_provider.dart';
+import '../../constants/colors.dart';
 
 class TotalChart extends StatefulWidget {
   const TotalChart({super.key});
@@ -32,37 +34,62 @@ class _TotalChartState extends State<TotalChart> {
                   alignment: Alignment.center,
                   fit: BoxFit.scaleDown,
                   child:
-                  DefaultText(
-                    text:'Total Expenses: ${NumberFormat.currency(locale: 'en_IN', symbol: '\$').format(total)}' ,
-                    fontWeight: FontWeight.bold,
-                    scaleFactor: 1.5,
-                  ),
+                    // SvgPicture.asset('assets/images/icon_income.svg'),
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          SvgPicture.asset('assets/images/expense.svg'),
+                          Row(
+                            children: [
+                              SvgPicture.asset('assets/images/icon_expense.svg'),
+                              SizedBox(width: 10.w,),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  DefaultText(
+                                    text: 'Expenses',
+                                    fontColor: whiteColor,
+                                  ),
+                                  SizedBox(height: 5.h,),
+                                  DefaultText(
+                                    text:NumberFormat.currency(locale: 'en_IN', symbol: '\$').format(total) ,
+                                    fontWeight: FontWeight.bold,
+                                    scaleFactor: 1.2,
+                                    fontColor: whiteColor,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
                 ),
                 SizedBox(height: 8.0.h),
-                ...list.map(
-                  (e) => Padding(
-                    padding:  EdgeInsets.all(3.0.h),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 8.0.w,
-                          height: 8.0.h,
-                          color: Colors.primaries[list.indexOf(e)],
-                        ),
-                         SizedBox(width: 5.0.w),
-                        DefaultText(
-                          text: e.title,
-                        ),
-                         SizedBox(width: 5.0.w),
-                        DefaultText(
-                          text: total == 0
-                              ? '0%'
-                              : '${((e.totalAmount / total) * 100).toStringAsFixed(2)}%',
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                // ...list.map(
+                //   (e) => Padding(
+                //     padding:  EdgeInsets.all(3.0.h),
+                //     child: Row(
+                //       children: [
+                //         Container(
+                //           width: 8.0.w,
+                //           height: 8.0.h,
+                //           color: Colors.primaries[list.indexOf(e)],
+                //         ),
+                //          SizedBox(width: 5.0.w),
+                //         DefaultText(
+                //           text: e.title,
+                //         ),
+                //          SizedBox(width: 5.0.w),
+                //         DefaultText(
+                //           text: total == 0
+                //               ? '0%'
+                //               : '${((e.totalAmount / total) * 100).toStringAsFixed(2)}%',
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

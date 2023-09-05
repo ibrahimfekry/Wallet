@@ -1,11 +1,11 @@
 import 'package:expense_app/core/constants/colors.dart';
 import 'package:expense_app/core/widgets/default_text.dart';
+import 'package:expense_app/pages/categories/all_expenses.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import '../../../models/database_provider.dart';
-import '../../../pages/all_expenses.dart';
 import './total_chart.dart';
 import './category_list.dart';
 

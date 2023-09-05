@@ -2,9 +2,9 @@ import 'package:expense_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import '../core/widgets/category_screen/category_fetcher.dart';
-import '../core/widgets/default_text.dart';
-import '../core/widgets/expense_form.dart';
+import '../../core/widgets/category_screen/category_fetcher.dart';
+import '../../core/widgets/default_text.dart';
+import '../../core/widgets/expense_form.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});

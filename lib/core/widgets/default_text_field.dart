@@ -58,6 +58,8 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
 
           cursorColor: primaryColor,
           decoration:  InputDecoration(
+            suffixIcon: widget.suffix,
+            prefixIcon: widget.prefix,
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(30),
