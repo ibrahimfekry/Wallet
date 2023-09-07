@@ -1,9 +1,6 @@
 import 'package:expense_app/pages/categories/all_expenses.dart';
 import 'package:expense_app/pages/categories/category_page.dart';
 import 'package:expense_app/pages/categories/expense_page.dart';
-import 'package:expense_app/pages/login/first_page.dart';
-import 'package:expense_app/pages/login/login_page.dart';
-import 'package:expense_app/pages/login/register_page.dart';
 import 'package:expense_app/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,15 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import './models/database_provider.dart';
-import 'bloc_observer/bloc_observer.dart';
-
 
 void main() {
   runApp(ChangeNotifierProvider(
     create: (_) => DatabaseProvider(),
     child: const MyApp(),
   ));
-  Bloc.observer = MyBlocObserver();
 }
 
 class MyApp extends StatelessWidget {
@@ -48,15 +42,12 @@ class MyApp extends StatelessWidget {
                   systemNavigationBarIconBrightness: Brightness.dark,
                 ),
               )),
-          initialRoute: LoginPage.name,
+          initialRoute: SplashScreen.name,
           routes: {
             SplashScreen.name: (_)=> const SplashScreen(),
             CategoryScreen.name: (_) => const CategoryScreen(),
             ExpenseScreen.name: (_) => const ExpenseScreen(),
             AllExpenses.name: (_) => const AllExpenses(),
-            FirstPage.name:(_)=> const FirstPage(),
-            RegisterPage.name:(_)=>const RegisterPage(),
-            LoginPage.name:(_)=>const LoginPage(),
           },
         );
       },
